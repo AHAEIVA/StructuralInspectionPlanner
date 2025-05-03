@@ -151,6 +151,12 @@ bool Rotorcraft::Triangle<System_t, State_t, Vector_t, region_t>::isVisible(Vect
     return false;
   if((st-this->x3).dot(this->n3)<0)
     return false;
+  if((st-this->x1).dot(this->n1)<0)
+    return false;
+  if((st-this->x2).dot(this->n2)<0)
+    return false;
+  if((st-this->x3).dot(this->n3)<0)
+    return false;
   for(int it = 0; it<camBoundNormal.size(); it++) {
     Vector3f camN = camBoundRotated(camBoundNormal[it], 0.0, s[3]);
     if(camN.dot(this->x1 - st)<0)
