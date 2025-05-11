@@ -15,7 +15,7 @@
 *   **`results_visualisation/visualize_path.py`:**
     *   Copies `koptplanner/data/latestPath.csv` to the `results_visualisation` directory.
     *   Visualizes the 3D path from the copied CSV file using `matplotlib`.
-    *   Features include reduced point resolution for clarity, direction arrows (quivers), and labels for start/end points.
+    *   Features include reduced point resolution, direction arrows (quivers) derived from yaw angle (X/Y) and Z-difference (Z), path transparency (alpha=0.5), shorter arrows (length=0.2), and labels for start/end points.
 *   Initial project structure seems to be in place with various modules (`koptplanner`, `optec`, `stl_generation`, `utils`, `request`).
 *   Build system (CMake, Make) is present.
 *   Some example/test cases or parameter files exist (e.g., `koptplanner/bigBenParam.yaml`, `request/src/bigBen.cpp`).

@@ -71,8 +71,8 @@ int main(int argc, char **argv)
   /* parameters for the path calculation (such as may change during mission) */
   srv.request.incidenceAngle = M_PI/6;
   srv.request.minDist = 0.2;
-  srv.request.maxDist = 0.5;
-  srv.request.numIterations = 100;
+  srv.request.maxDist = 0.8;
+  srv.request.numIterations = 20;
 
   /* read STL file and publish to rviz */
  
