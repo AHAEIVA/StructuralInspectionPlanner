@@ -7,6 +7,7 @@
     *   Filters triangles based on their normal's angle to a user-specified axis (X, Y, or Z via `--filter-axis` argument). Triangles are removed if their normal is aligned (within `max_angle`) with *either the positive or negative* direction of the specified axis.
     *   Can recalculate normals from vertices.
     *   Outputs a filtered ASCII STL file.
+    *   **Usage Note:** Output file must be specified using `--output <filename>` or `-o <filename>`, not as a second positional argument.
 *   **`stl_generation/transform_stl_axes.py`:**
     *   Successfully parses both ASCII and Binary STL files.
     *   Transforms coordinates by swapping Y and Z axes (X->X, Y->Z, Z->Y).

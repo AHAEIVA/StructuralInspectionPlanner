@@ -7,6 +7,7 @@
 
 ## Recent Changes:
 
+*   Clarified command-line usage for `refine_normals.py` regarding output file specification (must use `--output` or `-o`).
 *   Updated `results_visualisation/visualize_path.py` to load and display the `dfki_pipe.stl` model alongside the trajectory.
 *   Further updated `results_visualisation/visualize_path.py` to use yaw angle for arrow direction, increase path transparency, and shorten arrows.
 *   Updated `results_visualisation/visualize_path.py` to reduce point resolution, add direction arrows, and label start/end points.
@@ -21,8 +22,8 @@
 
 ## Next Steps (Planned):
 
-1.  Update `memory-bank/progress.md` to reflect the new visualization script.
-2.  Await further tasks or instructions.
+1.  Update `memory-bank/progress.md` to reflect the clarification on `refine_normals.py` usage.
+2.  Await user confirmation on the corrected `refine_normals.py` command or further tasks.
 
 ## Active Decisions & Considerations:
 
