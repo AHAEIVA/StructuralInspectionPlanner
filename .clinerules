@@ -1,0 +1,51 @@
+# Cline's Project Intelligence (.clinerules)
+## Structural Inspection Planner
+
+This file captures important patterns, preferences, and project intelligence to help Cline work more effectively on the Structural Inspection Planner project.
+
+### General Project Notes:
+
+*   **Memory Bank:** Core to Cline's operation. All Memory Bank files (`projectbrief.md`, `productContext.md`, `activeContext.md`, `systemPatterns.md`, `techContext.md`, `progress.md`) MUST be read at the start of every session and kept meticulously updated.
+*   **Workflow:**
+    *   **PLAN MODE:** Focus on understanding, planning, and documenting. Read Memory Bank, verify context, develop strategy, present approach.
+    *   **ACT MODE:** Focus on execution. Check Memory Bank, update documentation (including this file), execute task, document changes.
+*   **Primary Goal:** Assist in developing and refining the Structural Inspection Planner.
+
+### Technical Patterns & Preferences:
+
+*   **STL File Handling:**
+    *   The project deals with both ASCII and Binary STL files.
+    *   Python scripts reading STL files (like `refine_normals.py`) must be robust to both formats.
+    *   `UnicodeDecodeError` often means a binary file is being read in text mode. The fix is usually to open in binary mode (`'rb'`).
+*   **ROS Usage:**
+    *   The project is heavily based on ROS.
+    *   Pay attention to `package.xml`, `CMakeLists.txt` (for ROS dependencies and build rules), `.launch` files, and ROS-specific directory structures.
+*   **Python Version:** Python 3.8 is in use (as per traceback). Ensure compatibility.
+*   **Modularity:** The project is divided into several packages/directories (`koptplanner`, `optec`, `stl_generation`, `utils`, `request`). Understand the role of each.
+*   **Error Handling:** When fixing bugs, ensure solutions are robust and consider edge cases.
+
+### Tool Usage Patterns:
+
+*   **`read_file`:** Use to examine existing code or documentation.
+*   **`write_to_file`:** Use for creating new files or completely overwriting existing ones (e.g., initial Memory Bank setup).
+*   **`replace_in_file`:** Preferred for targeted changes to existing files. Be precise with SEARCH blocks.
+*   **`execute_command`:** For running scripts, build commands, etc. Explain commands clearly.
+*   **`ask_followup_question`:** Use if critical information is missing.
+*   **`attempt_completion`:** Use when the specific task is complete.
+
+### Communication with User:
+
+*   Be direct and technical.
+*   Clearly state actions taken and outcomes.
+*   When in PLAN MODE, use `plan_mode_respond` for conversational interaction.
+*   If Memory Bank files are missing, the first step is always to create them.
+
+### Current Task Specifics (Fix `refine_normals.py`):
+
+*   **Error:** `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb6 in position 85: invalid start byte`
+*   **File:** `stl_generation/refine_normals.py`
+*   **Likely Cause:** Opening a binary STL file in text mode.
+*   **Function to check:** `parse_stl_ascii` in `refine_normals.py`, specifically the `open()` call and `f.read()`.
+*   **Proposed Solution:** Change file opening mode to `'rb'` and adapt parsing logic if it's a binary STL, or implement a check to determine if it's ASCII or binary and handle accordingly. The function name `parse_stl_ascii` suggests it currently *only* expects ASCII. This might need to be made more general or a separate binary parser might be needed.
+
+*(This file will be updated as more project-specific intelligence is gathered.)*

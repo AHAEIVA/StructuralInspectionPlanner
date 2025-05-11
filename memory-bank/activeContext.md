@@ -1,0 +1,30 @@
+# Active Context
+
+## Current Work Focus:
+
+*   **Task:** Visualizing inspection trajectory.
+*   **Previous Task (Completed):** Located trajectory file, created `results_visualisation` directory, and developed `visualize_path.py` script to copy and visualize the trajectory.
+
+## Recent Changes:
+
+*   Updated `results_visualisation/visualize_path.py` to reduce point resolution, add direction arrows, and label start/end points.
+*   Identified trajectory output at `koptplanner/data/latestPath.csv`.
+*   Created `results_visualisation` directory.
+*   Created `results_visualisation/visualize_path.py` script for copying and visualizing the 3D path.
+*   Enhanced `stl_generation/transform_stl_axes.py` to include optional mesh centering.
+*   Successfully tested the centering functionality.
+*   Previously, created `stl_generation/transform_stl_axes.py` for Y-to-Z axis transformation.
+*   Previously, enhanced `stl_generation/refine_normals.py` for bidirectional axis filtering.
+*   Created all core Memory Bank files and `.clinerules`.
+
+## Next Steps (Planned):
+
+1.  Update `memory-bank/progress.md` to reflect the new visualization script.
+2.  Await further tasks or instructions.
+
+## Active Decisions & Considerations:
+
+*   The `visualize_path.py` script uses `matplotlib` for 3D plotting, now with point reduction, direction quivers, and start/end labels.
+*   The script first copies `latestPath.csv` from `koptplanner/data/` to `results_visualisation/` before attempting to plot.
+*   The `transform_stl_axes.py` script now offers both axis transformation and centering.
+*   Memory Bank is being kept current with script enhancements and new functionalities.

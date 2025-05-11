@@ -38,18 +38,18 @@ int main(int argc, char **argv)
 
   /* define the bounding box */
   koptplanner::inspection srv;
-  srv.request.spaceSize.push_back(15);
-  srv.request.spaceSize.push_back(15);
-  srv.request.spaceSize.push_back(15);
-  srv.request.spaceCenter.push_back(-0.0);
+  srv.request.spaceSize.push_back(10);
+  srv.request.spaceSize.push_back(10);
+  srv.request.spaceSize.push_back(10);
+  srv.request.spaceCenter.push_back(0.0);
   srv.request.spaceCenter.push_back(0.0);
   srv.request.spaceCenter.push_back(0.0);
   geometry_msgs::Pose reqPose;
 
   /* starting pose*/
-  reqPose.position.x = 3.0;
-  reqPose.position.y = 3.0;
-  reqPose.position.z = 0.0;
+  reqPose.position.x = 2.0;
+  reqPose.position.y = 2.0;
+  reqPose.position.z = 2.0;
   tf::Quaternion q = tf::createQuaternionFromRPY(0.0, 0.0, 0.0);
   reqPose.orientation.x = q.x();
   reqPose.orientation.y = q.y();
@@ -58,9 +58,9 @@ int main(int argc, char **argv)
   srv.request.requiredPoses.push_back(reqPose);
 
   /* final pose (remove if no explicit final pose is desired) */
-  reqPose.position.x = 3.0;
-  reqPose.position.y = 3.0;
-  reqPose.position.z = 0.0;
+  reqPose.position.x = 2.0;
+  reqPose.position.y = 2.0;
+  reqPose.position.z = 2.0;
   q = tf::createQuaternionFromRPY(0.0, 0.0, 0.0);
   reqPose.orientation.x = q.x();
   reqPose.orientation.y = q.y();
@@ -69,15 +69,16 @@ int main(int argc, char **argv)
   srv.request.requiredPoses.push_back(reqPose);
 
   /* parameters for the path calculation (such as may change during mission) */
-  srv.request.incidenceAngle = M_PI/4;
-  srv.request.minDist = 0.3;
-  srv.request.maxDist = 1.0;
-  srv.request.numIterations = 20;
+  srv.request.incidenceAngle = M_PI/6;
+  srv.request.minDist = 0.2;
+  srv.request.maxDist = 0.5;
+  srv.request.numIterations = 100;
 
   /* read STL file and publish to rviz */
-  //std::vector<nav_msgs::Path> * mesh = readSTLfile(ros::package::getPath("request")+"/meshes/turbine_base.stl");
-  //std::vector<nav_msgs::Path> * mesh = readSTLfile(ros::package::getPath("request")+"/meshes/BigBen.stl");
-  std::vector<nav_msgs::Path> * mesh = readSTLfile(ros::package::getPath("request")+"/meshes/pipe.stl");
+ 
+   std::vector<nav_msgs::Path> * mesh = readSTLfile(ros::package::getPath("request")+"/meshes/dfki_pipe.stl");
+
+ // std::vector<nav_msgs::Path> * mesh = readSTLfile(ros::package::getPath("request")+"/meshes/pipe.stl");
 
   ROS_INFO("mesh size = %i", (int)mesh->size());
   for(std::vector<nav_msgs::Path>::iterator it = mesh->begin(); it != mesh->end() && ros::ok(); it++)
