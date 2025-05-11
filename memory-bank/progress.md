@@ -15,6 +15,8 @@
 *   **`results_visualisation/visualize_path.py`:**
     *   Copies `koptplanner/data/latestPath.csv` to the `results_visualisation` directory.
     *   Visualizes the 3D path from the copied CSV file using `matplotlib`.
+    *   Loads and displays the `dfki_pipe.stl` model from `request/meshes/` using `numpy-stl`.
+    *   Adjusts plot limits to encompass both the path and the STL model.
     *   Features include reduced point resolution, direction arrows (quivers) derived from yaw angle (X/Y) and Z-difference (Z), path transparency (alpha=0.5), shorter arrows (length=0.2), and labels for start/end points.
 *   Initial project structure seems to be in place with various modules (`koptplanner`, `optec`, `stl_generation`, `utils`, `request`).
 *   Build system (CMake, Make) is present.

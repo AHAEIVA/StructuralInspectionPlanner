@@ -7,6 +7,7 @@
 
 ## Recent Changes:
 
+*   Updated `results_visualisation/visualize_path.py` to load and display the `dfki_pipe.stl` model alongside the trajectory.
 *   Further updated `results_visualisation/visualize_path.py` to use yaw angle for arrow direction, increase path transparency, and shorten arrows.
 *   Updated `results_visualisation/visualize_path.py` to reduce point resolution, add direction arrows, and label start/end points.
 *   Identified trajectory output at `koptplanner/data/latestPath.csv`.
@@ -25,7 +26,8 @@
 
 ## Active Decisions & Considerations:
 
-*   The `visualize_path.py` script now uses yaw for quiver X/Y direction, Z difference for quiver Z direction, path alpha at 0.5, and arrow length at 0.2. It continues to use `matplotlib` for 3D plotting, with point reduction, and start/end labels.
+*   The `visualize_path.py` script now loads and displays an STL model (`request/meshes/dfki_pipe.stl`) using `numpy-stl`. Plot limits are adjusted to fit both path and model.
+*   The script continues to use yaw for quiver X/Y direction, Z difference for quiver Z direction, path alpha at 0.5, and arrow length at 0.2. It uses `matplotlib` for 3D plotting, with point reduction, and start/end labels.
 *   The script first copies `latestPath.csv` from `koptplanner/data/` to `results_visualisation/` before attempting to plot.
 *   The `transform_stl_axes.py` script now offers both axis transformation and centering.
 *   Memory Bank is being kept current with script enhancements and new functionalities.

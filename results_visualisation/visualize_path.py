@@ -1,14 +1,17 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection # For STL plotting
 import csv
 import shutil
 import os
 import numpy as np # Import numpy for trigonometric functions
+from stl import mesh # For loading STL files
 
 # Define paths
 source_path_file = '../koptplanner/data/latestPath.csv'
 destination_folder = '.'
 destination_path_file = os.path.join(destination_folder, 'latestPath.csv')
+stl_model_path = '../request/meshes/dfki_pipe.stl' # Path to the STL model
 
 def copy_trajectory_file():
     """Copies the trajectory file to the current directory."""
@@ -130,30 +133,66 @@ def visualize_path():
     ax.set_title('3D Inspection Path with Directions')
     ax.legend()
     
-    # Set equal aspect ratio
-    all_coords = x_all + y_all + z_all # Use all points for range calculation
-    if all_coords:
-        max_val = max(all_coords)
-        min_val = min(all_coords)
-        plot_range = max_val - min_val
-        
-        mid_x = (max(x_all)+min(x_all)) / 2.0
-        mid_y = (max(y_all)+min(y_all)) / 2.0
-        mid_z = (max(z_all)+min(z_all)) / 2.0
-        
-        # Ensure a minimum range to avoid issues with single points or flat data
-        plot_range = max(plot_range / 2.0, 0.5) 
+    # Load and plot the STL model
+    try:
+        if os.path.exists(stl_model_path):
+            your_mesh = mesh.Mesh.from_file(stl_model_path)
+            # Create a Poly3DCollection from the mesh
+            # The mesh.vectors property provides the vertices of each triangle
+            poly_collection = Poly3DCollection(your_mesh.vectors, alpha=0.3, facecolor='gray', edgecolor='k', linewidth=0.3)
+            ax.add_collection3d(poly_collection)
+            print(f"STL model '{stl_model_path}' loaded and added to plot.")
+            
+            # Get extents of the STL model to adjust plot limits
+            stl_min = your_mesh.min_
+            stl_max = your_mesh.max_
+        else:
+            print(f"Warning: STL model not found at {stl_model_path}")
+            stl_min = np.array([np.inf]*3)
+            stl_max = np.array([-np.inf]*3)
+            
+    except Exception as e:
+        print(f"Error loading or processing STL model: {e}")
+        stl_min = np.array([np.inf]*3)
+        stl_max = np.array([-np.inf]*3)
 
-        ax.set_xlim(mid_x - plot_range, mid_x + plot_range)
-        ax.set_ylim(mid_y - plot_range, mid_y + plot_range)
-        ax.set_zlim(mid_z - plot_range, mid_z + plot_range)
-    else: # Fallback if all_coords is empty (should not happen if previous checks pass)
+    # Set equal aspect ratio considering both path and STL model
+    # Combine all coordinates from path and STL for overall range calculation
+    
+    # Path coordinates
+    path_coords_min = np.array([min(x_all) if x_all else np.inf, 
+                                min(y_all) if y_all else np.inf, 
+                                min(z_all) if z_all else np.inf])
+    path_coords_max = np.array([max(x_all) if x_all else -np.inf, 
+                                max(y_all) if y_all else -np.inf, 
+                                max(z_all) if z_all else -np.inf])
+
+    # Overall min and max including STL
+    overall_min = np.minimum(path_coords_min, stl_min)
+    overall_max = np.maximum(path_coords_max, stl_max)
+
+    if not np.isinf(overall_min).any() and not np.isinf(overall_max).any():
+        mid_x = (overall_max[0] + overall_min[0]) / 2.0
+        mid_y = (overall_max[1] + overall_min[1]) / 2.0
+        mid_z = (overall_max[2] + overall_min[2]) / 2.0
+
+        plot_range_x = (overall_max[0] - overall_min[0])
+        plot_range_y = (overall_max[1] - overall_min[1])
+        plot_range_z = (overall_max[2] - overall_min[2])
+        
+        max_plot_range = max(plot_range_x, plot_range_y, plot_range_z) / 2.0
+        max_plot_range = max(max_plot_range, 0.5) # Ensure a minimum range
+
+        ax.set_xlim(mid_x - max_plot_range, mid_x + max_plot_range)
+        ax.set_ylim(mid_y - max_plot_range, mid_y + max_plot_range)
+        ax.set_zlim(mid_z - max_plot_range, mid_z + max_plot_range)
+    else: # Fallback if no valid coordinates
         ax.set_xlim(-1, 1)
         ax.set_ylim(-1, 1)
         ax.set_zlim(-1, 1)
 
-
     plt.show()
+    print("Note: If the STL model is not visible or the plot looks incorrect, you might need to install 'numpy-stl': pip install numpy-stl")
 
 if __name__ == '__main__':
     if copy_trajectory_file():
