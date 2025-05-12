@@ -1,8 +1,11 @@
-length=[230.319, 248;
-230.292, 269;
+length=[261.397, 777;
+261.362, 841;
+261.304, 875;
+261.302, 884;
+261.223, 1010;
 ];
-timeEval = 34096;
-timeLKH = 31404;
+timeEval = 39208;
+timeLKH = 36803;
 timeRRTs = 3;
-timeDistEval = 374;
-timeDBS = 2114;
+timeDistEval = 140;
+timeDBS = 2093;

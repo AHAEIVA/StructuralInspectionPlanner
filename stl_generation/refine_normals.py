@@ -203,8 +203,8 @@ def main():
     parser = argparse.ArgumentParser(description='Process an STL (ASCII or Binary) file to remove triangles with normals pointing along a specified axis.')
     parser.add_argument('input_file', help='Input STL (ASCII or Binary) file path')
     parser.add_argument('--output', '-o', help='Output STL ASCII file path (output is always ASCII)')
-    parser.add_argument('--filter-axis', choices=['x', 'y', 'z'], default='z', help='Axis to filter normals against (default: z)')
-    parser.add_argument('--angle', '-a', type=float, default=50, help='Maximum angle (in degrees) from the specified axis for a normal to be considered "aligned" with it (triangles with normals forming an angle greater than this with the axis are kept) (default: 50)')
+    parser.add_argument('--filter-axis', choices=['x', 'y', 'z'], default='y', help='Axis to filter normals against (default: z)')
+    parser.add_argument('--angle', '-a', type=float, default=10, help='Maximum angle (in degrees) from the specified axis for a normal to be considered "aligned" with it (triangles with normals forming an angle greater than this with the axis are kept) (default: 50)')
     parser.add_argument('--recalculate-normals', '-r', action='store_true', help='Recalculate normals from vertices')
     
     args = parser.parse_args()

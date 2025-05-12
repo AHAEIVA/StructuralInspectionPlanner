@@ -5,7 +5,7 @@ camera/pitch: deg(35)
 
 #rotorcraft parameters
 rotorcraft/maxSpeed: 0.25
-rotorcraft/maxAngularSpeed: 0.5
+rotorcraft/maxAngularSpeed: 100.0
 
 #fixed-wing parameters
 fixedwing/speed: 10.0

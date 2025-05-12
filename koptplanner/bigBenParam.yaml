@@ -1,6 +1,6 @@
 #camera parameters
-camera/horizontal: deg(80)
-camera/vertical: deg(100)
+camera/horizontal: deg(100)
+camera/vertical: deg(110)
 camera/pitch: deg(0.0)
 
 #rotorcraft parameters
